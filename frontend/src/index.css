@@ -1,11 +1,13 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-  background: #f5efe6;
+  background: #F5EFE6;
   color: #3a2e39;
-  font-family: "Inter", sans-serif;
+  font-family: sans-serif;
 }
 
-* {
-  transition: all 0.25s ease;
+::-webkit-scrollbar {
+  display: none;
 }

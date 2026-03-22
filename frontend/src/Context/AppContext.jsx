@@ -5,58 +5,44 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [saved, setSaved] = useState([]);
   const [history, setHistory] = useState([]);
+  const [downloads, setDownloads] = useState([]);
 
-  // Load from localStorage on start
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("saved")) || [];
-    const historyData = JSON.parse(localStorage.getItem("history")) || [];
-
-    setSaved(savedData);
-    setHistory(historyData);
+    setSaved(JSON.parse(localStorage.getItem("saved")) || []);
+    setHistory(JSON.parse(localStorage.getItem("history")) || []);
+    setDownloads(JSON.parse(localStorage.getItem("downloads")) || []);
   }, []);
 
-  // Persist saved
   useEffect(() => {
     localStorage.setItem("saved", JSON.stringify(saved));
   }, [saved]);
 
-  // Persist history
   useEffect(() => {
     localStorage.setItem("history", JSON.stringify(history));
   }, [history]);
 
-  // Add to saved
-  const addToSaved = (file) => {
-    setSaved((prev) => {
-      if (prev.includes(file)) return prev;
-      return [file, ...prev];
-    });
-  };
+  useEffect(() => {
+    localStorage.setItem("downloads", JSON.stringify(downloads));
+  }, [downloads]);
 
-  // Add to history
-  const addToHistory = (file) => {
+  const addToSaved = (file) =>
+    setSaved((prev) => [file, ...prev]);
+
+  const addToHistory = (file) =>
     setHistory((prev) => [file, ...prev]);
-  };
 
-  // Remove from saved
-  const removeFromSaved = (file) => {
-    setSaved((prev) => prev.filter((f) => f !== file));
-  };
-
-  // Clear history
-  const clearHistory = () => {
-    setHistory([]);
-  };
+  const addToDownloads = (file) =>
+    setDownloads((prev) => [file, ...prev]);
 
   return (
     <AppContext.Provider
       value={{
         saved,
         history,
+        downloads,
         addToSaved,
         addToHistory,
-        removeFromSaved,
-        clearHistory,
+        addToDownloads,
       }}
     >
       {children}
@@ -64,5 +50,4 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-// 🎯 Custom hook
 export const useApp = () => useContext(AppContext);

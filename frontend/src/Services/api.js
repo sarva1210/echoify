@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: import.meta.env.VITE_API_URL + "/api",
 });
 
 export const getMetadata = (url) =>
@@ -9,6 +9,3 @@ export const getMetadata = (url) =>
 
 export const convertMedia = (params) =>
   API.get(`/media/convert`, { params });
-
-export const getStatus = (id) =>
-  API.get(`/media/status/${id}`);
