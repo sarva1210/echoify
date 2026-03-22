@@ -1,6 +1,6 @@
-import { gemini } from "./models.js";
+import { geminiModel } from "./models.js";
 
 export const generateSummary = async (text) => {
-    const res = await gemini.invoke(`Summarize:\n${text}`);
-    return res.content;
+  const res = await geminiModel.invoke(`Summarize:\n${text}`);
+  return res.content;
 };

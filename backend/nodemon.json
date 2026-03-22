@@ -1,0 +1,9 @@
+{
+  "watch": ["src"],
+  "ignore": [
+    "downloads/*",
+    "*.mp3",
+    "*.webm",
+    "*player-script.js"
+  ]
+}

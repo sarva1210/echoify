@@ -1,51 +1,42 @@
 import { addMediaJob } from "../Services/Queue/job.service.js";
-import { mediaQueue } from "../Queues/media.queue.js";
-import { streamPreview } from "../Services/Converter/preview.service.js";
 import { getVideoInfo } from "../Services/Extractor/youtube.service.js";
+import Media from "../Models/media.model.js";
 
 export const convertMedia = async (req, res) => {
   try {
-    const { url, quality = "128", format = "mp3", start, end } = req.query;
+    const { url, quality = "128", format = "mp3" } = req.query;
 
     if (!url) {
-      return res.status(400).json({ error: "URL is required" });
+      return res.status(400).json({ error: "URL required" });
     }
 
     const job = await addMediaJob({
       url,
       quality,
       format,
-      start: start ? Number(start) : null,
-      end: end ? Number(end) : null,
     });
 
-    res.json({ jobId: job.id });
+    res.json({
+      jobId: job.id,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-export const getJobStatus = async (req, res) => {
-  const job = await mediaQueue.getJob(req.params.id);
+export const getHistory = async (req, res) => {
+  const data = await Media.find().sort({ createdAt: -1 });
+  res.json(data);
+};
 
-  if (!job) {
-    return res.status(404).json({ error: "Job not found" });
-  }
-
-  res.json({
-    state: await job.getState(),
-    progress: job.progress || 0,
-    result: job.returnvalue || null,
-  });
+export const getMediaById = async (req, res) => {
+  const data = await Media.findById(req.params.id);
+  res.json(data);
 };
 
 export const getMetadata = async (req, res) => {
   try {
     const { url } = req.query;
-
-    if (!url) {
-      return res.status(400).json({ error: "URL required" });
-    }
 
     const data = await getVideoInfo(url);
 
@@ -53,14 +44,4 @@ export const getMetadata = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
-
-export const previewAudio = (req, res) => {
-  const { url, quality = "128" } = req.query;
-
-  if (!url) {
-    return res.status(400).json({ error: "URL required" });
-  }
-
-  streamPreview(url, quality, res);
 };
