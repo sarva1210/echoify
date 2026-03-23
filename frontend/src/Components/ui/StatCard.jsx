@@ -1,4 +1,5 @@
 export default function StatCard({ title, value }) {
+  
   return (
     <div className="bg-card p-4 rounded shadow">
       <p>{title}</p>
