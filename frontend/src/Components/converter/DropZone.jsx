@@ -12,8 +12,7 @@ export default function DropZone({ setUrl }) {
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
       whileHover={{ scale: 1.02 }}
-      className="border-2 border-dashed p-4 rounded-lg text-center"
-    >
+      className="border-2 border-dashed p-4 rounded-lg text-center">
       Drag & drop YouTube URL here
     </motion.div>
   );
