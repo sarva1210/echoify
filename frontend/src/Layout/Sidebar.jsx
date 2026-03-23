@@ -5,9 +5,7 @@ export default function Sidebar({ setPage }) {
 
   return (
     <div className={`bg-sidebar h-screen ${open ? "w-60" : "w-16"} transition`}>
-      <button onClick={() => setOpen(!open)} className="p-3">
-        ☰
-      </button>
+      <button onClick={() => setOpen(!open)} className="p-3"> ☰ </button>
 
       {["dashboard", "saved", "history", "downloads"].map((p) => (
         <button
