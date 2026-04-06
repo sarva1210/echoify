@@ -37,7 +37,6 @@ export const getMediaById = async (req, res) => {
 export const getMetadata = async (req, res) => {
   try {
     const { url } = req.query;
-
     const data = await getVideoInfo(url);
 
     res.json(data);
