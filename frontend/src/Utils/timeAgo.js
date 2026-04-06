@@ -7,6 +7,5 @@ export const timeAgo = (date) => {
     const val = Math.floor(seconds / intervals[key]);
     if (val > 0) return `${val}${key} ago`;
   }
-
   return "just now";
 };
