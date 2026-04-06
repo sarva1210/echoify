@@ -16,7 +16,6 @@ const mediaSchema = new mongoose.Schema({
     enum: ["processing", "completed"],
     default: "processing",
   },
-
   summary: String,
 
   createdAt: {
