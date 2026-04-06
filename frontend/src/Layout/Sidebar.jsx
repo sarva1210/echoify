@@ -11,8 +11,7 @@ export default function Sidebar({ setPage }) {
         <button
           key={p}
           onClick={() => setPage(p)}
-          className="block p-3 w-full text-left"
-        >
+          className="block p-3 w-full text-left">
           {open ? p.toUpperCase() : "•"}
         </button>
       ))}
