@@ -8,6 +8,8 @@ router.get("/convert", convertMedia);
 
 //info
 router.get("/info", getMetadata);
+
+//history
 router.get("/history", getHistory);
 router.get("/:id", getMediaById);
 
