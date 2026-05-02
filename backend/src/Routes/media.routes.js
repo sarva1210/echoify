@@ -6,6 +6,7 @@ const router = express.Router();
 //convert
 router.get("/convert", convertMedia);
 
+//info
 router.get("/info", getMetadata);
 router.get("/history", getHistory);
 router.get("/:id", getMediaById);
