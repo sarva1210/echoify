@@ -11,6 +11,8 @@ router.get("/info", getMetadata);
 
 //history
 router.get("/history", getHistory);
+
+//id
 router.get("/:id", getMediaById);
 
 export default router;
