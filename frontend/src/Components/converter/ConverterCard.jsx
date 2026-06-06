@@ -13,7 +13,6 @@ export default function ConverterCard() {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [jobId, setJobId] = useState(null);
-
   const { addToHistory, addToSaved, addToDownloads } = useApp();
 
   //WebSocket listener
@@ -29,7 +28,6 @@ export default function ConverterCard() {
 
   const handleConvert = async () => {
     setLoading(true);
-
     const metadata = await getMetadata(url);
 
     const res = await convertMedia({ url, quality: 128 });
@@ -54,7 +52,6 @@ export default function ConverterCard() {
     addToDownloads(fileData);
 
     toast.success("Download ready");
-
     setLoading(false);
   };
 
