@@ -7,6 +7,7 @@ export default function Dashboard() {
 
   return (
     <div className="grid grid-cols-3 gap-6">
+
       <div className="col-span-2">
         <ConverterCard />
       </div>
@@ -16,6 +17,7 @@ export default function Dashboard() {
         <StatCard title="Saved" value={saved.length} />
         <StatCard title="History" value={history.length} />
       </div>
+      
     </div>
   );
 }
