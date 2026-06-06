@@ -43,8 +43,7 @@ export const AppProvider = ({ children }) => {
         addToSaved,
         addToHistory,
         addToDownloads,
-      }}
-    >
+      }} >
       {children}
     </AppContext.Provider>
   );
